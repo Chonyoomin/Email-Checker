@@ -1,0 +1,11 @@
+From: Example Sender <sender@example.org>
+Subject: Preview check <script>alert('subject')</script>
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<p>Preview check: this should be readable text.</p>
+<script>alert('body script executed');</script>
+<img src="https://preview-network-check.invalid/pixel" onerror="alert('image handler executed')" alt="Image placeholder">
+<a href="https://different.example/login">bank.example</a>
+<p>&lt;img src=x onerror=alert('escaped text executed')&gt;</p>

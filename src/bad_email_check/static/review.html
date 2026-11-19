@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Review training labels · Bad Email Check</title>
+  <link rel="stylesheet" href="/static/app.css">
+  <link rel="stylesheet" href="/static/review.css">
+  <script src="/static/review.js" defer></script>
+</head>
+<body>
+<main class="review-page">
+  <header class="masthead"><span class="wordmark">Bad Email Check<span>LOCAL LABEL REVIEW</span></span><span class="local-note">No model is running here</span></header>
+  <section class="intro"><p class="eyebrow">PREPARE THE LABELS</p><h1>Your judgment, before training.</h1><p>Read each redacted public example. Source labels and model scores are hidden. If intent is unclear, choose Cannot determine.</p></section>
+  <p id="review-progress" role="status" aria-live="polite">Loading review…</p>
+  <div class="review-grid">
+    <article class="review-message" aria-labelledby="message-heading">
+      <h2 id="message-heading" tabindex="-1">Message</h2>
+      <dl><dt>From</dt><dd id="review-sender"></dd><dt>Subject</dt><dd id="review-subject"></dd></dl>
+      <pre id="review-body"></pre>
+      <h3>Extracted link text and destinations</h3><ul id="review-links"></ul>
+      <p class="hint">Links are shown as text. Websites and attachments are not opened. Addresses and destinations have been redacted.</p>
+    </article>
+    <aside class="review-decision">
+      <form id="decision-form">
+        <fieldset><legend>What is the intended message?</legend>
+          <label><input type="radio" name="label" value="scam" required> Deception intended to obtain money, credentials, or sensitive information</label>
+          <label><input type="radio" name="label" value="legitimate"> Legitimate communication</label>
+          <label><input type="radio" name="label" value="unknown"> Cannot determine from this evidence</label>
+        </fieldset>
+        <label class="review-check"><input id="owner-reviewed" type="checkbox" required> I reviewed this message myself.</label>
+        <button id="save-decision" class="primary" type="submit">Save and next</button>
+      </form>
+      <nav class="review-navigation" aria-label="Review messages"><button id="review-previous" type="button">Previous</button><button id="review-next" type="button">Next</button></nav>
+      <p id="review-error" role="alert"></p>
+      <p class="hint">Only your decision and content hashes are saved. Unknowns will not become negative training labels. Nothing trains or changes the active model when you save.</p>
+    </aside>
+  </div>
+  <section class="review-finish" aria-labelledby="finish-heading"><h2 id="finish-heading">Finish and freeze this review</h2>
+    <p class="hint">After all messages are reviewed, choose the candidate's validation rule. Comparisons use the fixed 0.5 raw-estimate cutoff. This is an exploratory check, not a reliability or probability claim.</p>
+    <form id="finalize-form">
+      <label for="review-policy">Candidate must</label><select id="review-policy">
+        <option value="recall_no_extra_alerts">Detect more phishing with no additional false alerts</option>
+        <option value="recall_with_alert_budget">Detect more phishing within my additional false-alert budget</option>
+        <option value="fewer_alerts">Reduce false alerts without detecting fewer phishing messages</option>
+      </select>
+      <label for="alert-budget">Maximum additional false alerts on validation messages</label><input id="alert-budget" type="number" min="0" max="12" value="0" disabled>
+      <label class="review-check"><input id="agree-policy" type="checkbox" required> I agree to this rule and want to freeze these label decisions.</label>
+      <button id="finish-review" class="primary" type="submit" disabled>Finish review</button>
+    </form>
+    <p class="hint">Freezing prevents further edits in this session. It does not start training. Keep final-test outcomes separate from model or threshold choices.</p>
+  </section>
+</main>
+</body>
+</html>

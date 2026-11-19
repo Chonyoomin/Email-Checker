@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Email Checker — Local workspace</title>
+  <link rel="stylesheet" href="/static/app.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#workspace">Skip to workspace</a>
+  <div class="page">
+    <header class="masthead">
+      <a class="wordmark" href="/" aria-label="Email Checker home">Email Checker<span>LOCAL WORKSPACE</span></a>
+      <span class="local-note">On your computer. Under your control.</span>
+    </header>
+    <main id="workspace">
+      <div class="intro"><p class="eyebrow">A closer look at your email</p><h1>Pause. Check the message.</h1>
+        <p>Look for signs of deception before you act.</p></div>
+      <section class="setup" aria-labelledby="setup-title">
+        <div><p class="eyebrow">LOCAL MODEL</p><h2 id="setup-title">Checking setup…</h2>
+          <p id="setup-message" role="status" aria-live="polite">Connecting to the local server.</p></div>
+        <button id="refresh" type="button">Check setup again</button>
+      </section>
+      <div class="workspace">
+        <section class="input-section" aria-labelledby="input-title">
+          <div class="section-heading"><span class="step">01</span><h2 id="input-title">Choose your input</h2></div>
+          <div class="tabs" role="tablist" aria-label="Email input source">
+            <button type="button" id="tab-paste" role="tab" aria-selected="true" aria-controls="panel-paste" tabindex="0">Paste text</button>
+            <button type="button" id="tab-import" role="tab" aria-selected="false" aria-controls="panel-import" tabindex="-1">Import .eml</button>
+            <button type="button" id="tab-gmail" role="tab" aria-selected="false" aria-controls="panel-gmail" tabindex="-1">Gmail</button>
+          </div>
+          <div id="panel-paste" role="tabpanel" aria-labelledby="tab-paste" tabindex="0">
+            <label for="email-text">Email text</label>
+            <p class="hint" id="paste-hint">Include sender and subject if available. Preview sends the text to this computer's local server; it is not saved.</p>
+            <textarea id="email-text" aria-describedby="paste-hint" maxlength="100000" placeholder="Paste an email here…" spellcheck="false"></textarea>
+          </div>
+          <div id="panel-import" role="tabpanel" aria-labelledby="tab-import" tabindex="0" hidden>
+            <label for="email-file">Email file (.eml)</label>
+            <p class="hint" id="import-hint">Select an .eml file, then preview its text and destinations locally. Email content is not saved.</p>
+            <input id="email-file" type="file" accept=".eml,message/rfc822" aria-describedby="import-hint">
+          </div>
+          <div id="panel-gmail" role="tabpanel" aria-labelledby="tab-gmail" tabindex="0" hidden>
+            <h3>Your Gmail inbox</h3>
+            <p id="gmail-state" class="hint" role="status" aria-live="polite">Checking Gmail connection…</p>
+            <div class="gmail-controls">
+              <button type="button" id="gmail-connect">Connect Gmail</button>
+              <button type="button" id="gmail-cancel">Cancel connection request</button>
+              <button type="button" id="gmail-refresh" disabled>Refresh list</button>
+              <button type="button" id="gmail-disconnect" disabled>Disconnect</button>
+            </div>
+            <ul id="gmail-messages" aria-label="Recent Gmail messages"></ul>
+            <div class="gmail-controls">
+              <button type="button" id="gmail-previous" disabled>Previous page</button>
+              <button type="button" id="gmail-next" disabled>Next page</button>
+            </div>
+            <p id="gmail-selected" class="hint" role="status" aria-live="polite">Select a message to preview and scan.</p>
+          </div>
+          <div class="scan-actions">
+            <button type="button" id="preview" class="primary">Preview email</button>
+            <button type="button" id="scan" disabled>Scan email</button>
+            <p class="hint">Preview extracts evidence. It does not assess scam risk.</p></div>
+          <p id="action-message" role="status" aria-live="polite"></p>
+          <section id="message-preview" aria-labelledby="preview-title" hidden>
+            <h3 id="preview-title">Message preview</h3>
+            <p id="preview-status" role="status" aria-live="polite"></p>
+            <dl><dt>Sender</dt><dd id="preview-sender"></dd><dt>Subject</dt><dd id="preview-subject"></dd></dl>
+            <h3>Message text</h3><pre id="preview-body" tabindex="0"></pre>
+            <h3>Link destinations</h3><ul id="preview-links"></ul>
+            <h3>Completeness</h3><ul id="preview-warnings"></ul>
+            <p id="preview-coverage" class="hint"></p>
+          </section>
+        </section>
+        <section class="assessment" id="assessment-section" aria-labelledby="assessment-title" data-state="setup_required">
+          <div class="section-heading"><span class="step">02</span><h2 id="assessment-title">Assessment</h2></div>
+          <p id="assessment-progress" class="hint" role="status" aria-live="polite" aria-atomic="true">Checking setup…</p>
+          <div class="empty-state" id="assessment-empty"><span class="empty-mark" aria-hidden="true">—</span>
+            <h3 id="assessment-state">No assessment yet</h3><p id="assessment-message">Once the local model is ready, your results will appear here.</p>
+            <span class="experimental">Experimental assessment</span></div>
+          <div id="assessment-result" tabindex="0" role="region" aria-label="Email assessment result" hidden>
+            <p id="result-status" class="experimental"></p>
+            <h3 id="result-score"></h3>
+            <section id="result-indicator-section" aria-labelledby="result-indicator-title">
+              <h3 id="result-indicator-title">Separate model signals</h3>
+              <p class="hint">Each signal is an uncalibrated model estimate, not a confirmed finding. Signals do not combine into the overall score.</p>
+              <ul id="result-indicators"></ul>
+            </section>
+            <h3>Warnings</h3><ul id="result-warnings"></ul>
+            <h3>Input coverage</h3><p id="result-coverage"></p>
+          </div>
+          <section id="training-feedback" aria-labelledby="feedback-title" hidden>
+            <h3 id="feedback-title">Report a malicious email</h3>
+            <p class="hint">If you know this email is malicious, submit it for future training review. Your report does not immediately change the model.</p>
+            <label class="feedback-consent" for="feedback-retain"><input type="checkbox" id="feedback-retain"> Save this email's extracted text, headers and links on this computer for review and future training.</label>
+            <button type="button" id="feedback-submit" disabled>Submit malicious example</button>
+            <p id="feedback-status" class="hint" role="status" aria-live="polite"></p>
+          </section>
+          <section id="saved-feedback" aria-labelledby="saved-feedback-title">
+            <h3 id="saved-feedback-title">Submitted examples</h3>
+            <p class="hint">Saved locally until you delete them. Verification is required before training.</p>
+            <button type="button" id="feedback-load">Load saved examples</button>
+            <p id="feedback-list-status" class="hint" role="status" aria-live="polite"></p>
+            <ul id="feedback-records"></ul>
+            <p id="feedback-delete-status" class="hint" role="status" aria-live="polite"></p>
+          </section>
+          <p class="disclosure">Linked websites and attachments were not inspected.</p>
+        </section>
+      </div>
+    </main>
+    <footer><span>Local email scam checker</span><span>Experimental local assessment</span></footer>
+  </div>
+</body>
+</html>

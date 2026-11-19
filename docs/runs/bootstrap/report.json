@@ -1,0 +1,61 @@
+{
+  "task": "CLEAN-EXPORT",
+  "project": "Email Checker",
+  "repository_name": "email-checker",
+  "status": "approved",
+  "checks": {
+    "fast_passed": 398,
+    "real_deselected": 5,
+    "fast_seconds": 14.06,
+    "node_passed": 36,
+    "ruff_files": 64,
+    "package_build": "passed",
+    "package_build_seconds": 3.5,
+    "environment": "existing source virtualenv; clean-machine install not run",
+    "source_branding_focused_passed": 39,
+    "gitignore_cases_passed": 9
+  },
+  "packages": [
+    {
+      "name": "email_checker-0.1.0-py3-none-any.whl",
+      "entries": 46,
+      "sha256": "40dd030f6ea96b6845e203c9498a4a4ad24a72c94d4835d8d966ee8749e56f30"
+    },
+    {
+      "name": "email_checker-0.1.0.tar.gz",
+      "entries": 97,
+      "sha256": "be486639d6aa958e2510b3b3f7728afbd9a9b2d980ff0397674d612f5cd68b82"
+    }
+  ],
+  "cold_machine_install": "not_run",
+  "model_download": "not_run",
+  "google_sign_in": "not_run",
+  "real_model_execution_from_export": "not_run",
+  "training": "not_run",
+  "published": false,
+  "phase7_status": "deferred_by_owner",
+  "phase7_complete": false,
+  "next_action": "Owner may copy the clean folder, complete local setup, select repository visibility/license and publish using PUBLISHING.md. Future coding tasks require owner scope.",
+  "independent_checks": {
+    "fast_passed": 398,
+    "real_deselected": 5,
+    "fast_seconds": 14.89,
+    "node_passed": 36,
+    "ruff_files": 64,
+    "imports_resolve_inside_export": true,
+    "broken_links": 0,
+    "private_paths": 0,
+    "verdict": "approved prepared source folder"
+  },
+  "reviewer": "clean_export_review",
+  "findings": [],
+  "final_folder_audit": {
+    "private_state": false,
+    "git_metadata": false,
+    "model_weights": false,
+    "generated_caches": false,
+    "identity_specific_paths": false,
+    "synthetic_eml_fixtures": 4,
+    "broken_links": 0
+  }
+}

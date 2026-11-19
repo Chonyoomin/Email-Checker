@@ -1,0 +1,4 @@
+include requirements.lock requirements-dev.lock .env.example
+recursive-include tests/product *.py
+recursive-include tests/fixtures *.eml
+exclude tests/test_agent_workflow.py tests/test_langchain_construction.py

@@ -1,0 +1,7 @@
+From: sender@example.org
+Subject: Synthetic incomplete input
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<p>Synthetic body with conflicting link destinations.</p>
+<a href="https://first.example/" href="https://second.example/">Example link</a>

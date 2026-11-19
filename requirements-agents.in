@@ -1,0 +1,5 @@
+# Development orchestration only; separate from the product runtime.
+langchain>=1,<2
+langchain-ollama>=1,<2
+pytest>=8,<10
+
