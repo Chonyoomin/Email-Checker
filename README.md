@@ -7,6 +7,8 @@ an email through read-only Gmail access. LAYA runs on your computer. Gmail is op
 baseline missed 8 of 12 source-labeled phishing examples; the first specialized
 candidate failed its improvement gate. [Known limits](docs/KNOWN_LIMITATIONS.md).
 
+Left all the agents and MD files transparent.
+
 ## Start here
 
 - [Complete Windows setup](docs/SETUP.md): prerequisites, dependencies, model, launch and checks.
